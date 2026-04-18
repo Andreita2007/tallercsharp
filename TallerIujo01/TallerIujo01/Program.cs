@@ -43,8 +43,63 @@ namespace TallerIujo01
 				sw.WriteLine(string.Format("ESTUDIANTE: {0} | NOTA: {1} | FECHA: {2: yyyy-MM-dd HH:mm}", nombre, nota,DateTime.Now));
 			}
 			
-			Console.Write("Press any key to continue . . . ");
-			Console.ReadKey(true);
+			// DESAFIO 1
+			
+			string datos = "usuario;clave123";
+			
+			string[] partesClave = datos.Split(';');
+			string clave = partesClave[1];
+			
+			if (clave.Contains("123"))
+			{
+				using (StreamWriter sw = new StreamWriter("Seguridad.txt", true))
+				{
+					sw.WriteLine("Aviso: Clave Débil");
+				}
+				Console.WriteLine("Aviso: Guardado en Seguridad.txt");
+			}
+			
+			else
+			{
+				Console.WriteLine("La Clave es Segura");
+			}
+			
+			// DESAFIO 2
+			
+			string origen = "avatar.jpg";
+			string destino = "respaldo.jpg";
+			
+			try
+			{
+				using (FileStream fsOrigen = new FileStream(origen, FileMode.Open, FileAccess.Read))
+					using (FileStream fsDestino = new FileStream(destino, FileMode.Create, FileAccess.Write))
+				{
+					byte[] buffer = new byte[1024];
+					int bytesLeidos;
+					
+					Console.WriteLine("Iniciado Copiado de Imágenes...");
+					
+					while ((bytesLeidos = fsOrigen.Read(buffer, 0, buffer.Length)) > 0)
+					{
+						fsDestino.Write(buffer, 0, bytesLeidos);
+					}
+				}
+				Console.WriteLine("Imagen Clonada Exitosamente como respaldo.jpg");
+			}
+			
+			catch (FileNotFoundException)
+			{
+				Console.WriteLine("ERROR: No se encontró el archivo avatar.jpg");
+			}
+			
+			catch (Exception ex)
+			{
+				Console.WriteLine("Ocurrió un Error Inesperado" + ex.Message);
+				
+				
+				Console.Write("Press any key to continue . . . ");
+				Console.ReadKey(true);
+			}
 		}
 	}
 }
