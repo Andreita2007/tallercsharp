@@ -43,7 +43,7 @@ namespace TallerIujo01
 				sw.WriteLine(string.Format("ESTUDIANTE: {0} | NOTA: {1} | FECHA: {2: yyyy-MM-dd HH:mm}", nombre, nota,DateTime.Now));
 			}
 			
-			// DESAFIO 1
+			// DESAFíO 1
 			
 			string datos = "usuario;clave123";
 			
@@ -64,7 +64,7 @@ namespace TallerIujo01
 				Console.WriteLine("La Clave es Segura");
 			}
 			
-			// DESAFIO 2
+			// DESAFíO 2
 			
 			string origen = "avatar.jpg";
 			string destino = "respaldo.jpg";
@@ -96,6 +96,25 @@ namespace TallerIujo01
 			{
 				Console.WriteLine("Ocurrió un Error Inesperado" + ex.Message);
 				
+				//DESAFíO 3
+				
+				string rutaCarpeta = AppDomain.CurrentDomain.BaseDirectory;
+				string[] archivos = Directory.GetFiles(rutaCarpeta);
+
+				foreach (string archivo in archivos)
+				{
+					FileInfo info = new FileInfo(archivo);
+					if (info.Length > 5120)
+					{
+						if (info.Name != "DesafiosVarios.exe" && info.Name != "avatar.jpg")
+						{
+							Console.WriteLine("Borrando archivo pesado: " + info.Name);
+						}
+					}
+				}
+				
+				
+				//Andrea Peña (2do "A")
 				
 				Console.Write("Press any key to continue . . . ");
 				Console.ReadKey(true);
