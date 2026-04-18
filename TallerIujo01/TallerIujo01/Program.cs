@@ -1,12 +1,4 @@
-﻿/*
- * Creado por SharpDevelop.
- * Usuario: usuario
- * Fecha: 17/04/2026
- * Hora: 10:56
- * 
- * Para cambiar esta plantilla use Herramientas | Opciones | Codificación | Editar Encabezados Estándar
- */
-using System;
+﻿using System;
 using System.IO;
 
 namespace TallerIujo01
@@ -36,21 +28,19 @@ namespace TallerIujo01
 			
 			//Flujo de Archivos
 			
-			string rutaraiz = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DatosIUJO");
-			
+			string rutaRaiz = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DatosIUJO");
+			string rutaReportes = Path.Combine(rutaRaiz, "Reportes");
 
-			if(Directory.Exists(rutaraiz)){
-				Directory.CreateDirectory("Reportes");
-				Console.WriteLine("Creando Directorio Correctamente");
-			
+			if(!Directory.Exists(rutaReportes)){
+				Directory.CreateDirectory(rutaReportes);
+				Console.WriteLine("Creando Directorio de Reportes Correctamente");
 			}
-			string archivoTexto = Path.Combine(rutaraiz, "notas.txt");
 			
+			string archivoTexto = Path.Combine(rutaReportes, "notas.txt");
 			Console.WriteLine(archivoTexto);
-			
-			using(StreamWriter sw = new StreamWriter(archivoTexto,true)){
-			
-				sw.WriteLine(string.Format("ID: {0} - NOTA: {1} - {yyyy-MM-dd HH:mm)}", id, nota, DataTime.Now() ));
+			using(StreamWriter sw = new StreamWriter(archivoTexto,true))
+			{
+				sw.WriteLine(string.Format("ESTUDIANTE: {0} | NOTA: {1} | FECHA: {2: yyyy-MM-dd HH:mm}", nombre, nota,DateTime.Now));
 			}
 			
 			Console.Write("Press any key to continue . . . ");
